@@ -60,13 +60,26 @@ namespace Frontend.Services
             }
             else
             {
-                return null;
+                throw new ArticleNotFoundException("Not Found");
             }
         }
 
-        public void Update(ArticleCreateViewModel article)
+        public void Update(int Id, ArticleCreateViewModel article)
         {
-            throw new NotImplementedException();
+            var articleJSON = JsonConvert.SerializeObject(article);
+            var content = new StringContent(articleJSON, Encoding.UTF8, "application/json");
+            var response = _httpClient.Send(
+                new HttpRequestMessage(HttpMethod.Put, _apiBaseUrl + $"Articles/{Id}") { Content = content }
+            );
+
+            if (response.StatusCode.ToString() == "BadRequest")
+            {
+                throw new TopicNotFoundException("TopicId doesn't exist");
+            }
+            else if (response.StatusCode.ToString() == "NotFound")
+            {
+                throw new ArticleNotFoundException("Not Found");
+            }
         }
     }
 }

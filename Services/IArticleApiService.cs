@@ -7,7 +7,7 @@ namespace Frontend.Services
         public ICollection<Article> GetAll();
         public Article GetById(int id);
         public void Create(ArticleCreateViewModel article);
-        public void Update(ArticleCreateViewModel article);
+        public void Update(int Id, ArticleCreateViewModel article);
         public void Delete(int id);
     }
 }
