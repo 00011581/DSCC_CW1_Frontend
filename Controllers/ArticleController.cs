@@ -1,4 +1,6 @@
-﻿using Frontend.Services;
+﻿using Frontend.Exceptions;
+using Frontend.Models;
+using Frontend.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -36,11 +38,17 @@ namespace Frontend.Controllers
         // POST: ArticleController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(ArticleCreateViewModel article)
         {
             try
             {
+                _apiService.Create(article);
                 return RedirectToAction(nameof(Index));
+            }
+            catch (TopicNotFoundException)
+            {
+                ModelState.AddModelError(nameof(ArticleCreateViewModel.TopicId), "TopicId not found");
+                return View(article);
             }
             catch
             {

@@ -1,5 +1,7 @@
-﻿using Frontend.Models;
+﻿using Frontend.Exceptions;
+using Frontend.Models;
 using Newtonsoft.Json;
+using System.Text;
 using System.Text.Json;
 
 namespace Frontend.Services
@@ -15,9 +17,18 @@ namespace Frontend.Services
             _httpClient = httpClient;
         }
 
-        public void Create(Article article)
+        public void Create(ArticleCreateViewModel article)
         {
-            throw new NotImplementedException();
+            var articleJSON = JsonConvert.SerializeObject(article);
+            var content = new StringContent(articleJSON, Encoding.UTF8, "application/json");
+            var response = _httpClient.Send(
+                new HttpRequestMessage(HttpMethod.Post, _apiBaseUrl + "Articles") { Content = content}
+            );
+
+            if (response.StatusCode.ToString() == "BadRequest")
+            {
+                throw new TopicNotFoundException("TopicId doesn't exist");
+            }
         }
 
         public void Delete(int id)
@@ -53,7 +64,7 @@ namespace Frontend.Services
             }
         }
 
-        public void Update(Article article)
+        public void Update(ArticleCreateViewModel article)
         {
             throw new NotImplementedException();
         }
