@@ -17,8 +17,15 @@ namespace Frontend.Controllers
         // GET: ArticleController
         public ActionResult Index()
         {
-            var articles = _apiService.GetAll();
-            return View(articles);
+            try
+            {
+                var articles = _apiService.GetAll();
+                return View(articles);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
         }
 
         // GET: ArticleController/Details/5
@@ -32,7 +39,11 @@ namespace Frontend.Controllers
             catch (ArticleNotFoundException)
             {
                 return StatusCode(404, "Not Found");
-            }        
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
         }
 
         // GET: ArticleController/Create
@@ -78,6 +89,10 @@ namespace Frontend.Controllers
             {
                 return StatusCode(404, "Not Found");
             }
+            catch (Exception)
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
         }
 
         // POST: ArticleController/Edit/5
@@ -108,7 +123,19 @@ namespace Frontend.Controllers
         // GET: ArticleController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            try
+            {
+                var article = _apiService.GetById(id);
+                return View(article);
+            }
+            catch (ArticleNotFoundException)
+            {
+                return StatusCode(404, "Not Found");
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
         }
 
         // POST: ArticleController/Delete/5
@@ -118,11 +145,16 @@ namespace Frontend.Controllers
         {
             try
             {
+                _apiService.Delete(id);
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (ArticleNotFoundException)
             {
-                return View();
+                return StatusCode(404, "Not Found");
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Internal Server Error");
             }
         }
     }

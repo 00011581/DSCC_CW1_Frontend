@@ -33,7 +33,23 @@ namespace Frontend.Services
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            var response = _httpClient.Send(
+                new HttpRequestMessage(HttpMethod.Delete, _apiBaseUrl + $"Articles/{id}")
+            );
+
+            if (response.IsSuccessStatusCode)
+            {
+
+            }
+
+            else if (response.StatusCode.ToString() == "NotFound")
+            {
+                throw new ArticleNotFoundException("Not Found");
+            }
+            else
+            {
+                throw new Exception();
+            }
         }
 
         public ICollection<Article> GetAll()
