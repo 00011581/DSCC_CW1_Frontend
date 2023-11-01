@@ -7,6 +7,7 @@ builder.Services.AddControllersWithViews();
 
 // HttpClient
 builder.Services.AddHttpClient<IArticleApiService, ArticleApiService>();
+builder.Services.AddHttpClient<ITopicApiService, TopicApiService>();
 
 var app = builder.Build();
 
