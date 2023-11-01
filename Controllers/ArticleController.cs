@@ -14,7 +14,7 @@ namespace Frontend.Controllers
             _apiService = apiService;
         }
 
-        // GET: ArticleController
+        // GET: Article/
         public ActionResult Index()
         {
             try
@@ -28,7 +28,7 @@ namespace Frontend.Controllers
             }
         }
 
-        // GET: ArticleController/Details/5
+        // GET: Article/Details/5
         public ActionResult Details(int id)
         {
             try
@@ -46,13 +46,13 @@ namespace Frontend.Controllers
             }
         }
 
-        // GET: ArticleController/Create
+        // GET: Article/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: ArticleController/Create
+        // POST: Article/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(ArticleCreateViewModel article)
@@ -73,7 +73,7 @@ namespace Frontend.Controllers
             }
         }
 
-        // GET: ArticleController/Edit/5
+        // GET: Article/Edit/5
         public ActionResult Edit(int id)
         {
             try
@@ -95,7 +95,7 @@ namespace Frontend.Controllers
             }
         }
 
-        // POST: ArticleController/Edit/5
+        // POST: Article/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, ArticleCreateViewModel article)
@@ -120,7 +120,7 @@ namespace Frontend.Controllers
             }
         }
 
-        // GET: ArticleController/Delete/5
+        // GET: Article/Delete/5
         public ActionResult Delete(int id)
         {
             try
@@ -138,7 +138,7 @@ namespace Frontend.Controllers
             }
         }
 
-        // POST: ArticleController/Delete/5
+        // POST: Article/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)

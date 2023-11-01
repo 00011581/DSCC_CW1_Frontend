@@ -13,7 +13,7 @@ namespace Frontend.Controllers
             _apiService = apiService;
         }
 
-        // GET: TopicController
+        // GET: Topic/
         public ActionResult Index()
         {
             try
