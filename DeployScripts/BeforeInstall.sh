@@ -1,0 +1,1 @@
+﻿rm -rf C:\Users\Administrator\Desktop\CWFrontendApp\*
