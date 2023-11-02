@@ -3,8 +3,3 @@ os: windows
 files:
   - source: app
     destination: C:\Users\Administrator\Desktop\CWFrontendApp
-hooks:
-  BeforeInstall:
-    - location: DeployScripts/BeforeInstall.sh
-      timeout: 120
-      runas: Administrator
